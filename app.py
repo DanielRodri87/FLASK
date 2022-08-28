@@ -20,6 +20,21 @@ def index(): # Aqui criamos a função index que será responsável por renderiz
     carros = Carros.query.all() # Aqui criamos uma variável carros que receberá todos os carros do banco de dados
     return render_template('index.html', carros=carros) # Chamamos a página
 
+@app.route('/add', methods=['GET','POST']) # Aqui criamos a rota para adicionar um carro
+
+
+def add(): # aqui tá com defeito ainda, não funciona, apenas está renderizando a página
+    if request.method == 'POST':
+        carros = Carros(request.form['marca'], request.form['valor'])
+        db.session.add(carros)
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('add.html')
+
+
+
 if __name__ == '__main__':
     db.create_all() # Criação do banco de dados
-    app.run(debug=True) # Roda o app em modo debug
+    app.run() # Roda o app em modo debug
+
+
