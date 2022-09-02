@@ -1,40 +1,59 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify # Aqui importamos as bibliotecas necessárias para o funcionamento do nosso app
+from flask import Flask, render_template, request, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__, template_folder='templates') # Aqui criamos o objeto app que será o nosso objeto principal
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///carros.sqlite3' # configuramos a conexão com o banco de dados
+app = Flask(__name__, template_folder='templates')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///estudantes.sqlite3'
 
-db = SQLAlchemy(app) # Aqui criamos o objeto db que será o nosso objeto de conexão com o banco de dados
+db = SQLAlchemy(app)
 
-class Carros(db.Model): # Aqui criamos a classe Carros que será responsável por armazenar os dados dos carros
-    modelo = db.Column('modelo', db.Integer, primary_key=True, autoincrement=True)
-    marca = db.column('marca', db.String(20))
-    valor = db.column('valor', db.Float)
 
-    def __init__(self, marca, valor): # Construtor da classe Carros
-        self.marca = marca
+class Produto(db.Model):
+    id = db.Column('id', db.Integer, primary_key=True, autoincrement=True)
+    nome = db.Column(db.String(150))
+    valor = db.Column(db.Integer)
+
+    def __init__(self, nome, valor):
+        self.nome = nome
         self.valor = valor
 
-@app.route('/') # Aqui criamos a rota principal do nosso app
-def index(): # Aqui criamos a função index que será responsável por renderizar a página principal do nosso app
-    carros = Carros.query.all() # Aqui criamos uma variável carros que receberá todos os carros do banco de dados
-    return render_template('index.html', carros=carros) # Chamamos a página
 
-@app.route('/add', methods=['GET','POST']) # Aqui criamos a rota para adicionar um carro
+@app.route('/')
+def index():
+    carros = Produto.query.all()
+    return render_template('index.html', estudantes=carros)
 
 
-def add(): # aqui tá com defeito ainda, não funciona, apenas está renderizando a página
+
+
+@app.route('/add', methods=['GET', 'POST'])
+def add():
     if request.method == 'POST':
-        carros = Carros(request.form['marca'], request.form['valor'])
-        db.session.add(carros)
+        car_add = Produto(request.form['nome'], request.form['valor'])
+        db.session.add(car_add)
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('add.html')
 
 
+@app.route('/edit/<int:id>', methods=['GET', 'POST'])
+def edit(id):
+    car_edit = Produto.query.get(id)
+    if request.method == 'POST':
+        car_edit.nome = request.form['nome']
+        car_edit.valor = request.form['valor']
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('edit.html', estudante=car_edit)
+
+
+@app.route('/delete/<int:id>')
+def delete(id):
+    car_delete = Produto.query.get(id)
+    db.session.delete(car_delete)
+    db.session.commit()
+    return redirect(url_for('index'))
+
 
 if __name__ == '__main__':
-    db.create_all() # Criação do banco de dados
-    app.run() # Roda o app em modo debug
-
-
+    db.create_all()
+    app.run(debug=True)
