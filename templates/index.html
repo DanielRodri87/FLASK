@@ -13,7 +13,8 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
-            <a href="/add" class="btn btn-outline-info">Adicionar Carro</a>
+            <button type="button"><a href="/add" class="btn btn-outline-info">Adicionar Carro</a></button>
+            
         </div>
         <div class="col-xs-12">
             <table class="table">
@@ -34,8 +35,8 @@
                     <td>{{e.marca}}</td>
                     <td>{{e.ano}}</td>
                     <td>
-                        <a href="/edit/{{e.id}}">Editar</a> |
-                        <a href="/delete/{{e.id}}">Excluir</a>
+                        <button type="button"><a href="/edit/{{e.id}}">Editar</a></button> |
+                        <button type="button"><a href="/delete/{{e.id}}">Excluir</a></button>
                     </td>
                 </tr>
                 {% endfor %}

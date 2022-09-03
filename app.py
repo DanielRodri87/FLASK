@@ -34,11 +34,16 @@ def index(): # Função que renderiza a página inicial
 # Criando a rota para a página de cadastro
 @app.route('/add', methods=['GET', 'POST']) # Método GET para renderizar a página e o POST para receber os dados do formulário
 def add():
-    # Verificando se o método é POST
     if request.method == 'POST':
         car_add = Produto(request.form['nome'], request.form['valor'], request.form['marca'], request.form['ano'])
         db.session.add(car_add) # Adicionando o objeto car_add ao banco de dados
         db.session.commit() # Salvando as alterações
+
+        # se a resposta for vazia, exclui o objeto
+        if request.form['nome'] == '':
+            db.session.delete(car_add)
+            db.session.commit()
+            
         return redirect(url_for('index')) # Redirecionando para a página inicial
     return render_template('add.html') # Renderizando a página de cadastro
 
