@@ -5,21 +5,21 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Estudante</title>
+    <title>concecionaria</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 </head>
 <body>
-<h1 style="text-align: center;">Flask Cars</h1>
+<h1 style="text-align: center;">Concecionária Don't Car</h1>
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
-            <a href="/add">Adicionar veiculos</a>
+            <a href="/add" class="btn btn-outline-info">Adicionar Carro</a>
         </div>
         <div class="col-xs-12">
             <table class="table">
                 <thead>
                 <tr>
-                    <th>marca</th>
+                    <th>modelo</th>
                     <th>valor</th>
                     <th>Ações</th>
                 </tr>
@@ -27,7 +27,7 @@
                 <tbody>
                 {% for e in estudantes %}
                 <tr>
-                    <td>{{e.marca}}</td>
+                    <td>{{e.nome}}</td>
                     <td>{{e.valor}}</td>
                     <td>
                         <a href="/edit/{{e.id}}">Editar</a> |
