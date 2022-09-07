@@ -15,7 +15,7 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
-            <button class="btn btn-success" type="button"><a href="/add" class="btn btn-outline-info">Adicionar Carro</a></button>
+            <button id="add" type="button"><a href="/add" class="btn btn-outline-info">Adicionar Carro</a></button>
             
         </div>
         <div class="col-xs-12">
@@ -37,8 +37,8 @@
                     <td>{{e.marca}}</td>
                     <td>{{e.ano}}</td>
                     <td>
-                        <button type="button" class="btn btn-info"><a href="/edit/{{e.id}}">Editar</a></button>
-                        <button type="button" class="btn btn-danger"><a href="/delete/{{e.id}}">Excluir</a></button>
+                        <button id="edit" type="button"><a href="/edit/{{e.id}}">Editar</a></button>
+                        <button id="delete" type="button" ><a href="/delete/{{e.id}}">Excluir</a></button>
                     </td>
                 </tr>
                 {% endfor %}
@@ -78,6 +78,32 @@
         /* cobrir todo corpo */
         background-repeat: no-repeat;
         background-size: cover;
+    }
+
+    #edit, #add{
+        background-color: #006400;
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+    #delete{
+        background-color: #8B0000;
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        margin: 4px 2px;
+        cursor: pointer;
     }
 
 
