@@ -41,7 +41,7 @@ def add():
         db.session.commit() # Salvando as alterações
 
         # se a resposta for vazia, exclui o objeto
-        if request.form['nome'] == '':
+        if request.form['nome'] == '' and request.form['valor'] == '' and request.form['marca'] == '' and request.form['ano'] == '':
             db.session.delete(car_add)
             db.session.commit()
             
