@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 </head>
 <body>
-<h1 style="text-align:center;">Editar {{ estudante.nome }}</h1>
+    <div class="head">
+        <h1 style="text-align:center;">Editar {{ estudante.nome }}</h1>
+    </div>
 <form action="/edit/{{ estudante.id }}" class="container" method="post">
     <div class="row">
         <div class="col-md-6">
@@ -35,6 +37,15 @@
 </form>
 </body>
 <style>
+
+    .head{
+
+        background-image: linear-gradient(#191970, #0a0808); 
+        height: 120px;
+        color: white;
+        padding: 10px;
+    }
+
     body{
       background-image: url('https://i.pinimg.com/736x/81/42/dd/8142dd0fde85819f231e15bfa6c002d9.jpg');
         
